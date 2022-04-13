@@ -15,6 +15,10 @@ class _ToDoAppState extends State<ToDoApp> {
     Task task = new Task(color: color, name: title);
     tasks.add(task);
   }
+  
+  void doneTask(int index){
+    final item = tasks.removeAt(index);
+  }
 
   Color? selectedColor;
 
@@ -82,19 +86,27 @@ class _ToDoAppState extends State<ToDoApp> {
                           ),
                           Expanded(
                             flex: 3,
-                            child: Container(
-                              height: 60,
-                              width: 60,
-                              decoration: BoxDecoration(
-                                  color: Color(0xff6FB88E),
-                                  borderRadius: BorderRadius.only(
-                                    topRight: Radius.circular(20),
-                                    bottomRight: Radius.circular(20),
-                                  )),
-                              child: Icon(
-                                Icons.done,
-                                color: Colors.white,
-                                size: 55,
+                            child: GestureDetector(
+                              onTap: (){
+                                setState(() {
+                                  doneTask(index);
+                                });
+
+                              },
+                              child: Container(
+                                height: 60,
+                                width: 60,
+                                decoration: BoxDecoration(
+                                    color: Color(0xff6FB88E),
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(20),
+                                      bottomRight: Radius.circular(20),
+                                    )),
+                                child: Icon(
+                                  Icons.done,
+                                  color: Colors.white,
+                                  size: 55,
+                                ),
                               ),
                             ),
                           ),
