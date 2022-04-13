@@ -225,7 +225,6 @@ class _ToDoAppState extends State<ToDoApp> {
                                                 const Text('Rangni tanlang!'),
                                             behavior: SnackBarBehavior.floating,
                                             shape: RoundedRectangleBorder(
-
                                               borderRadius:
                                                   BorderRadius.circular(24),
                                             ),
