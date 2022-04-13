@@ -18,7 +18,6 @@ class _ToDoAppState extends State<ToDoApp> {
 
   Color? selectedColor;
 
-  final _formKey = GlobalKey<FormState>();
   TextEditingController name = TextEditingController();
   @override
   Widget build(BuildContext context) {
@@ -34,14 +33,19 @@ class _ToDoAppState extends State<ToDoApp> {
         centerTitle: true,
         backgroundColor: Color(0xffF2C94C),
       ),
-      body: Form(
-        key: _formKey,
-        child: Padding(
-          padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
-          child: Column(
-            children: [
-              Expanded(
-                child: ListView.builder(
+      body: Padding(
+        padding: const EdgeInsets.only(top: 10, right: 10, left: 10),
+        child: Column(
+          children: [
+            Expanded(
+              child: Padding(
+                padding: const EdgeInsets.only(bottom: 10),
+                child: ListView.separated(
+                  separatorBuilder: (BuildContext context, int index) {
+                    return SizedBox(
+                      height: 5,
+                    );
+                  },
                   itemCount: tasks.length,
                   itemBuilder: (context, index) {
                     return Container(
@@ -100,164 +104,157 @@ class _ToDoAppState extends State<ToDoApp> {
                   },
                 ),
               ),
-              Padding(
-                padding: const EdgeInsets.only(bottom: 10),
-                child: Container(
-                  height: MediaQuery.of(context).size.height * 0.2,
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                    children: [
-                      Expanded(
-                        child: Padding(
-                          padding: EdgeInsets.only(left: 10),
-                          child: ListView(
-                            scrollDirection: Axis.horizontal,
-                            children: [
-                              GestureDetector(
+            ),
+            Padding(
+              padding: const EdgeInsets.only(bottom: 10),
+              child: Container(
+                height: MediaQuery.of(context).size.height * 0.2,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Expanded(
+                      child: Padding(
+                        padding: EdgeInsets.only(left: 10),
+                        child: ListView(
+                          scrollDirection: Axis.horizontal,
+                          children: [
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedColor = Colors.green;
+                                });
+                              },
+                              child: CircleColors(
+                                color: Colors.green,
+                              ),
+                            ),
+                            SizedBox(
+                              width: 24,
+                            ),
+                            GestureDetector(
                                 onTap: () {
                                   setState(() {
-                                    selectedColor = Colors.green;
+                                    selectedColor = Colors.red;
                                   });
                                 },
                                 child: CircleColors(
-                                  color: Colors.green,
-                                ),
+                                  color: Colors.red,
+                                )),
+                            SizedBox(
+                              width: 24,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedColor = Colors.yellow;
+                                });
+                              },
+                              child: CircleColors(
+                                color: Colors.yellow,
                               ),
-                              SizedBox(
-                                width: 24,
+                            ),
+                            SizedBox(
+                              width: 24,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedColor = Colors.blue;
+                                });
+                              },
+                              child: CircleColors(
+                                color: Colors.blue,
                               ),
-                              GestureDetector(
-                                  onTap: () {
-                                    setState(() {
-                                      selectedColor = Colors.red;
-                                    });
-                                  },
-                                  child: CircleColors(
-                                    color: Colors.red,
-                                  )),
-                              SizedBox(
-                                width: 24,
+                            ),
+                            SizedBox(
+                              width: 24,
+                            ),
+                            GestureDetector(
+                              onTap: () {
+                                setState(() {
+                                  selectedColor = Colors.amber;
+                                });
+                              },
+                              child: CircleColors(
+                                color: Colors.amber,
                               ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedColor = Colors.yellow;
-                                  });
-                                },
-                                child: CircleColors(
-                                  color: Colors.yellow,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 24,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedColor = Colors.blue;
-                                  });
-                                },
-                                child: CircleColors(
-                                  color: Colors.blue,
-                                ),
-                              ),
-                              SizedBox(
-                                width: 24,
-                              ),
-                              GestureDetector(
-                                onTap: () {
-                                  setState(() {
-                                    selectedColor = Colors.amber;
-                                  });
-                                },
-                                child: CircleColors(
-                                  color: Colors.amber,
-                                ),
-                              ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                      SafeArea(
-                        child: Container(
-                          height: 60,
-                          width: 500,
-                          decoration: BoxDecoration(
-                            border: Border.all(color: Colors.blue),
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(20),
-                          ),
-                          child: Row(
-                            children: [
-                              Expanded(
-                                flex: 8,
-                                child: TextFormField(
-                                  controller: name,
-                                  onSaved: (name) {},
-                                  // validator: (value) {
-                                  //   if (value == null || value.isEmpty) {
-                                  //     return 'Please enter some text';
-                                  //   }
-                                  //   return null;
-                                  // },
-                                  decoration: InputDecoration(
-                                      border: InputBorder.none,
-                                      contentPadding:
-                                          EdgeInsets.only(left: 10)),
-                                ),
+                    ),
+                    SafeArea(
+                      child: Container(
+                        height: 60,
+                        width: 500,
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.blue),
+                          color: Colors.white,
+                          borderRadius: BorderRadius.circular(20),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              flex: 8,
+                              child: TextFormField(
+                                controller: name,
+                                onSaved: (name) {},
+                                decoration: InputDecoration(
+                                    border: InputBorder.none,
+                                    contentPadding: EdgeInsets.only(left: 10)),
                               ),
-                              Expanded(
-                                flex: 2,
-                                child: Container(
-                                  height: 60,
-                                  width: 70,
-                                  decoration: BoxDecoration(
-                                      color: Colors.black,
-                                      borderRadius: BorderRadius.only(
-                                          topRight: Radius.circular(20),
-                                          bottomRight: Radius.circular(20))),
-                                  child: IconButton(
-                                      onPressed: () {
-                                        setState(() {
-                                          final snackBar = SnackBar(
-                                            width: 150,
-                                            content:
-                                                const Text('Rangni tanlang!'),
-                                            behavior: SnackBarBehavior.floating,
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(24),
-                                            ),
-                                            backgroundColor: Colors.red,
-                                          );
+                            ),
+                            Expanded(
+                              flex: 2,
+                              child: Container(
+                                height: 60,
+                                width: 70,
+                                decoration: BoxDecoration(
+                                    color: Colors.black,
+                                    borderRadius: BorderRadius.only(
+                                        topRight: Radius.circular(20),
+                                        bottomRight: Radius.circular(20))),
+                                child: IconButton(
+                                    onPressed: () {
+                                      setState(() {
+                                        final snackBar = SnackBar(
+                                          width: 150,
+                                          content:
+                                              const Text('Rangni tanlang!'),
+                                          behavior: SnackBarBehavior.floating,
+                                          shape: RoundedRectangleBorder(
+                                            borderRadius:
+                                                BorderRadius.circular(24),
+                                          ),
+                                          backgroundColor: Colors.red,
+                                        );
 
-                                          // Find the ScaffoldMessenger in the widget tree
-                                          // and use it to show a SnackBar.
-                                          selectedColor == null
-                                              ? ScaffoldMessenger.of(context)
-                                                  .showSnackBar(snackBar)
-                                              : addTask(
-                                                  selectedColor!,
-                                                  name.text,
-                                                );
-                                        });
-                                      },
-                                      icon: Icon(
-                                        Icons.add,
-                                        color: Colors.white,
-                                      )),
-                                ),
+                                        // Find the ScaffoldMessenger in the widget tree
+                                        // and use it to show a SnackBar.
+                                        selectedColor == null
+                                            ? ScaffoldMessenger.of(context)
+                                                .showSnackBar(snackBar)
+                                            : addTask(
+                                                selectedColor!,
+                                                name.text,
+                                              );
+                                      });
+                                    },
+                                    icon: Icon(
+                                      Icons.add,
+                                      color: Colors.white,
+                                    )),
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
                       ),
-                    ],
-                  ),
+                    ),
+                  ],
                 ),
               ),
-            ],
-          ),
+            ),
+          ],
         ),
       ),
     );
@@ -275,8 +272,8 @@ class CircleColors extends StatelessWidget {
       width: 46,
       height: 46,
       decoration: BoxDecoration(
-        color: color, shape: BoxShape.circle,
-        
+        color: color,
+        shape: BoxShape.circle,
       ),
     );
   }
