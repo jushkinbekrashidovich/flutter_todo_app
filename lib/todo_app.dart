@@ -276,9 +276,7 @@ class CircleColors extends StatelessWidget {
       height: 46,
       decoration: BoxDecoration(
         color: color, shape: BoxShape.circle,
-        // border: Border.all(
-        //   color: Color.fromARGB(255, 0, 166, 33),
-        // )
+        
       ),
     );
   }
