@@ -91,7 +91,6 @@ class _ToDoAppState extends State<ToDoApp> {
                                 setState(() {
                                   doneTask(index);
                                 });
-
                               },
                               child: Container(
                                 height: 60,
